@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import ApplicationView
+from .views import ApplicationView, ApplicationUpdateView
 
 urlpatterns = [
-    path('', ApplicationView.as_view(), name='get_application'),
-    path('update_status/<int:pk>/', ApplicationView.update_status, name='application_update')
+    path('', ApplicationView.as_view()),
+    path('<int:pk>/', ApplicationUpdateView.as_view())
 ]

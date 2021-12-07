@@ -9,7 +9,8 @@ class SponserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SponsorModel
-        fields = ('fullname', 'number', 'status', 'type_user', 'organization_name', 'all_sum', 'remain_sum')
+        fields = ('fullname', 'number', 'status', 'type_user',
+                  'organization_name', 'all_sum', 'remain_sum')
 
     def get_all_sum(self, obj):
         all = SponsorModel.objects.filter(pk=obj.pk).annotate(
@@ -24,14 +25,6 @@ class SponserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         sponsor = SponsorModel.objects.create(**validated_data)
         return sponsor
-
-    def update(self, instance, validated_data):
-        instance.fullname = validated_data['fullname']
-        instance.number = validated_data['number']
-        instance.type_user = validated_data['type_user']
-        instance.organization_name = validated_data.get('organization_name', '')
-        instance.save()
-        return instance
 
 
 class StudentSerializer(serializers.ModelSerializer):
